@@ -1,0 +1,18 @@
+[
+    {
+        "MetricName": "kube_resourcequota",
+        "MetricType": "Gauge",
+        "Description": "Information about resource quota.",
+        "Unit": "",
+        "LabelsAndTags": "`resourcequota`=&lt;quota-name&gt; <br> `namespace`=&lt;namespace&gt; <br> `resource`=&lt;ResourceName&gt; <br> `type`=&lt;quota-type&gt;",
+        "Status": "STABLE"
+    },
+    {
+        "MetricName": "kube_resourcequota_created",
+        "MetricType": "Gauge",
+        "Description": "Unix creation timestamp",
+        "Unit": "seconds",
+        "LabelsAndTags": "`resourcequota`=&lt;quota-name&gt; <br> `namespace`=&lt;namespace&gt;",
+        "Status": "STABLE"
+    }
+]

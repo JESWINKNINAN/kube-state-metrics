@@ -1,0 +1,19 @@
+[
+    {
+        "MetricName": "kube_lease_owner",
+        "MetricType": "Gauge",
+        "Description": "Information about the Lease's owner",
+        "Unit": "",
+        "LabelsAndTags": "`lease`=&lt;lease-name&gt; <br> `owner_kind`=&lt;onwer kind&gt; <br> `owner_name`=&lt;owner name&gt;",
+        "Status": "EXPERIMENTAL"
+    },
+    {
+        "MetricName": "kube_lease_renew_time ",
+        "MetricType": "Gauge",
+        "Description": "Kube lease renew time.",
+        "Unit": "seconds",
+        "LabelsAndTags": "`lease`=&lt;lease-name&gt;",
+        "Status": "EXPERIMENTAL"
+    }
+]
+
