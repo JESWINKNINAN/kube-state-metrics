@@ -62,6 +62,11 @@ spec:
               fieldPath: metadata.namespace
 {{- end }}
         args:
+{{  if .Values.extraArgs  }}
+        {{- range .Values.extraArgs  }}
+        - {{ . }}
+        {{- end  }}
+{{  end  }}
 {{  if .Values.collectors.certificatesigningrequests  }}
         - --collectors=certificatesigningrequests
 {{  end  }}
@@ -147,7 +152,7 @@ spec:
         - --collectors=volumeattachments
 {{  end  }}
 {{ if .Values.namespace }}
-        - --namespace={{ .Values.namespace }}
+        - --namespace={{ .Values.namespace | join "," }}
 {{ end }}
 {{ if .Values.autosharding.enabled }}
         - --pod=$(POD_NAME)
@@ -156,6 +161,10 @@ spec:
 {{ if .Values.kubeconfig.enabled }}
         - --kubeconfig=/opt/k8s/.kube/config
 {{ end }}
+{{ if .Values.selfMonitor.telemetryHost }}
+        - --telemetry-host={{ .Values.selfMonitor.telemetryHost }}
+{{ end }}
+        - --telemetry-port=8081
 {{- if .Values.kubeconfig.enabled }}
         volumeMounts:
         - name: kubeconfig
