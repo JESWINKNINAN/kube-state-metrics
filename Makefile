@@ -55,7 +55,7 @@ doccheck: generate
 	@echo OK
 
 docs:
-	cd "./docs/docsgenerator/" ; go run generatemddocs.go
+	cd "./internal/docsgenerator/" ; go run generatemddocs.go
 
 build-local:
 	GOOS=$(shell uname -s | tr A-Z a-z) GOARCH=$(ARCH) CGO_ENABLED=0 go build -ldflags "-s -w -X ${PKG}/version.Version=${TAG} -X ${PKG}/version.Revision=${GIT_COMMIT} -X ${PKG}/version.Branch=${BRANCH} -X ${PKG}/version.BuildUser=${USER}@${HOST} -X ${PKG}/version.BuildDate=${BUILD_DATE}" -o kube-state-metrics
