@@ -21,7 +21,6 @@ import (
 	"reflect"
 	"sort"
 	"strings"
-
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 	admissionregistrationv1 "k8s.io/api/admissionregistration/v1"
@@ -40,6 +39,8 @@ import (
 	clientset "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/klog/v2"
+	"fmt"
+	"encoding/json"
 
 	ksmtypes "k8s.io/kube-state-metrics/v2/pkg/builder/types"
 	"k8s.io/kube-state-metrics/v2/pkg/listwatch"
@@ -64,6 +65,43 @@ type Builder struct {
 	totalShards      int
 	buildStoreFunc   ksmtypes.BuildStoreFunc
 	allowLabelsList  map[string][]string
+}
+
+
+type Docsdb struct {
+	Name              string 
+	Help              string
+	Type              string
+	DeprecatedVersion string
+}
+
+func GetDocsContent() {
+	//var docsMetaData []Docsdb
+// 	//var a []generator.FamilyGenerator
+   test := []string{"namespace", "job_name"}
+   a := jobMetricFamilies(test)
+   //fmt.Println(a)
+// 	a:= fmt.Sprintf("%s", jobMetricFamilies())
+// 	//fmt.Println("%v",leaseMetricFamilies)
+//err := json.Unmarshal([]byte(fmt.Sprintf("%v", a)), &a)
+// 	// if err != nil {
+// 	// 	fmt.Printf("Error Parsing the Metadata :%s", err)
+// 	// }
+// 	// fmt.Println(a)
+//     //fmt.Println(a)
+// 	//enc := json.NewEncoder(os.Stdout)
+n, err := json.Marshal(a)
+if err !=nil{
+fmt.Println("test",err)
+}
+// 	//  err := enc.Encode(a)
+// 	//  if err != nil {
+// 	// 	 fmt.Println("test err",err.Error())
+// 	//  }
+  
+fmt.Println(n)
+//mt.Println(tryJson)
+
 }
 
 // NewBuilder returns a new builder.

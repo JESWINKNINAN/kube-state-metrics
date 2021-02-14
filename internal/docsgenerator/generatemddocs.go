@@ -13,13 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package main
 
-import "k8s.io/kube-state-metrics/v2/pkg/docscollector"
+import "k8s.io/kube-state-metrics/v2/internal/store"
 
 func main() {
 
-	docscollector.DocsCreate("lease-metrics")
-	docscollector.DocsCreate("resourcequota-metrics")
+	store.GetDocsContent()
 
 }

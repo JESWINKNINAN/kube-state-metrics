@@ -18,7 +18,6 @@ package store
 
 import (
 	"context"
-
 	storagev1 "k8s.io/api/storage/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -34,7 +33,6 @@ var (
 	descVolumeAttachmentLabelsName          = "kube_volumeattachment_labels"
 	descVolumeAttachmentLabelsHelp          = "Kubernetes labels converted to Prometheus labels."
 	descVolumeAttachmentLabelsDefaultLabels = []string{"volumeattachment"}
-
 	volumeAttachmentMetricFamilies = []generator.FamilyGenerator{
 		*generator.NewFamilyGenerator(
 			descVolumeAttachmentLabelsName,
@@ -52,7 +50,7 @@ var (
 						},
 					},
 				}
-			}),
+			}), 
 		),
 		*generator.NewFamilyGenerator(
 			"kube_volumeattachment_info",
