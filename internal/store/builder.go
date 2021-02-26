@@ -66,6 +66,10 @@ type Builder struct {
 	allowLabelsList  map[string][]string
 }
 
+func GetFamily()(testreturn []generator.FamilyGenerator){
+	test := configMapMetricFamilies
+	return test
+}
 // NewBuilder returns a new builder.
 func NewBuilder() *Builder {
 	b := &Builder{}

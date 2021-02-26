@@ -17,43 +17,30 @@ limitations under the License.
 package docscollector
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
+	generator "k8s.io/kube-state-metrics/v2/pkg/metric_generator"
+	"k8s.io/kube-state-metrics/v2/internal/store"
 )
-
-//Docsdb is struct to store the decoded docs metadata
-type Docsdb struct {
-	MetricName    string `json:"MetricName"`
-	MetricType    string `json:"MetricType"`
-	Description   string `json:"Description"`
-	Unit          string `json:"Unit"`
-	LabelsAndTags string `json:"LabelsAndTags"`
-	Status        string `json:"Status"`
-}
 
 //docsTemplateText is template text for Docs
 const docsTemplateText = `| Metric name | Metric Type | Description | Unit (where applicable) | Labels/tags | Status |
-| ----------- | ----------- | ----------- | ----------------------- | ----------- | ------ |{{range .}}
-|{{.MetricName }}|{{.MetricType}}|{{.Description}}|{{.Unit}}|{{.LabelsAndTags}}|{{.Status}}|{{end}}`
+| ----------- | ----------- | ----------- | ----------------------- | ----------- | ------ |
+{{range.}}|{{.Name}}|{{.Type}}|{{.Help}}|
+{{end}}`
 
 //DocsCreate creates md files automatically
 func DocsCreate(file string) {
 
+	var docsMetaData []generator.FamilyGenerator
+	docsMetaData = store.GetFamily()
+	
 	mdfile, err := os.Create("../../docs/" + file + ".md")
 	if err != nil {
 		log.Fatalf("Error Creating Markdown Files : %s", err)
 	}
 	t := template.Must(template.New("tmpl").Parse(docsTemplateText))
-	getDetails, _ := ioutil.ReadFile(file + ".json")
-	var docsMetaData []Docsdb
-	err = json.Unmarshal(getDetails, &docsMetaData)
-	if err != nil {
-		log.Fatalf("Error Parsing the Metadata :%s", err)
-	}
-
 	t.Execute(mdfile, docsMetaData)
 
 }
