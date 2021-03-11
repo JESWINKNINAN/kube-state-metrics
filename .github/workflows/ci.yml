@@ -103,6 +103,10 @@ jobs:
       run: |
         go get -v -t -d ./...
         make install-tools
+    
+    - name: Automatic Docs Generation
+      run: |
+        make docs
 
     - name: Check that all metrics are documented
       run: |
