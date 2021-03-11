@@ -11,7 +11,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package docscollector
+package docs
 
 import (
 	"log"
@@ -31,13 +31,12 @@ const docsTemplateText = `| Metric name | Metric Type | Description | Unit (wher
 
 //DocsCreate creates md files automatically
 func DocsCreate(file string) {
-
 	var docsMetaData []generator.FamilyGenerator
 	docsMetaData = store.GetFamily()
 
-	mdfile, err := os.Create("../../docs/" + file + ".md")
+	mdfile, err := os.Create("./docs/" + file + ".md")
 	if err != nil {
-		log.Fatalf("Error Creating Markdown Files : %s", err)
+		log.Fatalf("Error Creating Markdown Files : %v", err)
 	}
 	t := template.Must(template.New("tmpl").Parse(docsTemplateText))
 	t.Execute(mdfile, docsMetaData)

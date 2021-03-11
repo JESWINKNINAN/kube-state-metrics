@@ -13,11 +13,11 @@ limitations under the License.
 package main
 
 import (
-	"k8s.io/kube-state-metrics/v2/pkg/docscollector"
+	"k8s.io/kube-state-metrics/v2/tools/docs"
 )
 
 func main() {
 
-	docscollector.DocsCreate("configMapMetricFamilies")
+	docs.DocsCreate("configMapMetricFamilies")
 
 }
